@@ -36,6 +36,9 @@ Route::group(['middleware' => [ 'userRole']], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/getSale', 'HomeController@getSale')->name('getSale');
+    Route::get('/orderConfirm', 'HomeController@orderConfirm')->name('orderConfirm');
+    Route::get('/buyNow/{id}', 'HomeController@buyNow')->name('buyNow');
+    Route::get('/makePayment/{id}', 'HomeController@makePayment')->name('makePayment');
 
 
 // Route::get('/home', 'HomeController@index')->name('home');

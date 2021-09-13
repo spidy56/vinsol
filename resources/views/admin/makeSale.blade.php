@@ -4,6 +4,12 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if(Session::has('message'))
+                <div class="error" style="text-align:center;">
+                    <h4 class="error">{{ Session::get('message') }}</h4>
+                </div>
+
+                @endif
             <form action="{{route('makeSaleProcess')}}" method="POST" enctype="multipart/form-data">
 @csrf
                 <div class="card">

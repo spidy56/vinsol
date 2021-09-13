@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Sep 13, 2021 at 12:53 AM
--- Server version: 8.0.23-0ubuntu0.20.04.1
--- PHP Version: 7.3.28-2+ubuntu20.04.1+deb.sury.org+1
+-- Host: localhost
+-- Generation Time: Sep 13, 2021 at 02:50 PM
+-- Server version: 8.0.23
+-- PHP Version: 7.3.28-2+ubuntu18.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -30,10 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `failed_jobs` (
   `id` bigint UNSIGNED NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -45,7 +44,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `migrations` (
   `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -69,10 +68,18 @@ CREATE TABLE `orders` (
   `user_id` int DEFAULT NULL,
   `sale_id` int DEFAULT NULL,
   `quantity` int DEFAULT NULL,
+  `total` decimal(8,2) DEFAULT NULL,
   `payment_status` int DEFAULT NULL COMMENT '1=sucess,2=pending,3=failed',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `sale_id`, `quantity`, `total`, `payment_status`, `created_at`, `updated_at`) VALUES
+(12, 2, 3, 1, '39.60', 1, '2021-09-13 03:44:05', '2021-09-13 03:44:05');
 
 -- --------------------------------------------------------
 
@@ -81,8 +88,8 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -121,12 +128,12 @@ INSERT INTO `sale_products` (`id`, `title`, `description`, `price`, `discounted_
 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `role` int NOT NULL DEFAULT '2',
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -137,7 +144,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Vinsol  Admin', 'admin@vinsol.com', NULL, '$2y$10$n4gk98mHCav71jH6MMd.5OAVKaNnvpUSDfsrkK8/v0tqj.wnIWRS6', 1, NULL, '2021-09-12 09:55:28', '2021-09-12 09:55:28'),
-(2, 'tushar', 'tushar.seth@gmail.com', NULL, '$2y$10$KkBtzt/iRH3p6YZnDwwtj.4RkaAbuP6W.6bP3LSlmPjUR.NdEmYAG', 2, 'taibotOmDX5HvLRjAQgQrgXCol0rRWCwVMwtAK8Rn4ygIKXEwLpvEfqRCky2', '2021-09-12 09:56:33', '2021-09-12 09:56:33');
+(2, 'tushar', 'tushar.seth@gmail.com', NULL, '$2y$10$KkBtzt/iRH3p6YZnDwwtj.4RkaAbuP6W.6bP3LSlmPjUR.NdEmYAG', 2, 'UxbfB43h3diJfQP6ADDt1ruaTOGgw0TXIF3JzskYrYb3T7vqMe0cs5PU9dj8', '2021-09-12 09:56:33', '2021-09-12 09:56:33');
 
 --
 -- Indexes for dumped tables
@@ -200,7 +207,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `sale_products`

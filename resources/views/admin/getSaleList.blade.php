@@ -6,6 +6,12 @@
         <div class="container">
             <div class="header_wrap">
               <div class="num_rows">
+                @if(Session::has('message'))
+                <div class="error" style="text-align:center;">
+                    <h4 class="error">{{ Session::get('message') }}</h4>
+                </div>
+
+                @endif
                 <div class="card-header">Sale List
                     <div style="float: right;">
                         <a href="{{route('home')}}" class="d">>> Make Sale</a>
